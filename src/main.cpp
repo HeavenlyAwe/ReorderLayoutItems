@@ -1,7 +1,4 @@
 #include "domparser.h"
-#include "mainwindow.h"
-#include <QApplication>
-#include <QDebug>
 #include <QString>
 
 #include <iostream>
