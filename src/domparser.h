@@ -9,7 +9,7 @@ class DomParser {
 public:
   DomParser();
 
-  void parse(QString path);
+  bool parse(QString path);
   void organizeItems();
   void save(QString path);
   void print();

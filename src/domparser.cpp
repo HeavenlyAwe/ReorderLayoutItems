@@ -8,11 +8,14 @@
 
 DomParser::DomParser() {}
 
-void DomParser::parse(QString path) {
+bool DomParser::parse(QString path) {
   std::cerr << "Reading file: " << path.toStdString() << std::endl;
 
   if (!path.isEmpty()) {
     QFile file(path);
+    if (!file.exists()) {
+      return false;
+    }
     if (file.open(QIODevice::ReadOnly)) {
       m_document = new QDomDocument;
       m_document->setContent(&file);
@@ -23,6 +26,7 @@ void DomParser::parse(QString path) {
       save(path + ".bkp");
     }
   }
+  return true;
 }
 
 void DomParser::save(QString path) {

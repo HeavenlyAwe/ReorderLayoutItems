@@ -5,7 +5,8 @@
 
 void help(QString message, QString arg) {
   std::cerr << "  " << message.toStdString() << std::endl;
-  std::cerr << "  " << arg.toStdString() << " " << "<ui file> [--verbose] [--backup]" << std::endl;
+  std::cerr << "  " << arg.toStdString() << " "
+            << "<ui file> [--verbose] [--backup] [--help]" << std::endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -16,7 +17,16 @@ int main(int argc, char *argv[]) {
     help("Please give the UI file to reorder.", argv[0]);
     return 1;
   }
+
+  // Reading the first argument to the path variable. This can still be the help
+  // command.
   path = QString(argv[1]);
+
+  // If the help command was
+  if (path == "--help" || path == "-h") {
+    help("Help", argv[0]);
+    return 0;
+  }
 
   for (int i = 2; i < argc; ++i) {
     if (QString(argv[i]) == "--verbose") {
@@ -25,7 +35,7 @@ int main(int argc, char *argv[]) {
     } else if (QString(argv[i]) == "--backup") {
       parser.setBackup(true);
 
-    } else if (QString(argv[i]) == "--help" || QString(argv[i]) == "-h") {
+    } else if (path == "--help" || path == "-h") {
       help("Help", argv[0]);
       return 0;
 
@@ -35,9 +45,12 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  parser.parse(path);
-  parser.organizeItems();
-  parser.print();
+  if (parser.parse(path)) {
+    parser.organizeItems();
+    parser.print();
+  } else {
+      help("The given file doesn't exist", argv[0]);
+  }
 
   return 0;
 }
