@@ -9,7 +9,7 @@
 DomParser::DomParser() {}
 
 void DomParser::parse(QString path) {
-  std::cerr << "Reading file :" << path.toStdString() << std::endl;
+  std::cerr << "Reading file: " << path.toStdString() << std::endl;
 
   if (!path.isEmpty()) {
     QFile file(path);
