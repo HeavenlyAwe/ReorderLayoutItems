@@ -12,6 +12,7 @@ public:
   void parse(QString path);
   void organizeItems();
   void save(QString path);
+  void print();
 
   void setVerbose(bool verbose);
   bool isVerbose();

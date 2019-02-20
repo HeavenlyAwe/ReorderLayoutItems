@@ -29,7 +29,7 @@ int main(int argc, char *argv[]) {
 
   parser.parse(path);
   parser.organizeItems();
-  parser.save(path);
+  parser.print();
 
   return 0;
 }

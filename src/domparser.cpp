@@ -27,7 +27,6 @@ void DomParser::parse(QString path) {
 
 void DomParser::save(QString path) {
   std::cerr << "Saving file: " << path.toStdString() << std::endl;
-
   if (!path.isEmpty()) {
     QFile file(path);
     if (file.open(QIODevice::WriteOnly)) {
@@ -35,7 +34,9 @@ void DomParser::save(QString path) {
       file.close();
     }
   }
+}
 
+void DomParser::print() {
   std::cout << m_document->toString().toStdString() << std::endl;
 }
 
