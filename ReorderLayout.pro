@@ -25,14 +25,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp \
-    dommodel.cpp \
-    domitem.cpp
+    domparser.cpp
 
 HEADERS += \
-        mainwindow.h \
-    dommodel.h \
-    domitem.h
+    domparser.h
 
-FORMS += \
-        mainwindow.ui
+FORMS +=

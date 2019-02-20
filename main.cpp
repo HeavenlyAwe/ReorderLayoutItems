@@ -1,12 +1,35 @@
+#include "domparser.h"
 #include "mainwindow.h"
 #include <QApplication>
+#include <QDebug>
+#include <QString>
 
-int main(int argc, char *argv[])
-{
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.resize(640, 480);
-    w.show();
+#include <iostream>
 
-    return a.exec();
+int main(int argc, char *argv[]) {
+  DomParser parser;
+
+  QString path = "";
+  for (int i = 1; i < argc; ++i) {
+    if (QString(argv[i]) == "--verbose") {
+      parser.setVerbose(true);
+
+    } else if (QString(argv[i]) == "--backup") {
+      parser.setBackup(true);
+
+    } else if (QString(argv[i]) == "--help" || QString(argv[i]) == "-h") {
+      std::cerr << "Please give the UI file to reorder." << std::endl;
+      std::cerr << argv[0] << "<ui file> [--verbose]" << std::endl;
+      return 1;
+
+    } else {
+      path = QString(argv[i]);
+    }
+  }
+
+  parser.parse(path);
+  parser.organizeItems();
+  parser.save(path);
+
+  return 0;
 }
